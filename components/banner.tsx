@@ -50,8 +50,8 @@ export default function Banner() {
       />
       <div className='z-40 flex flex-col gap-4 responsive-container py-8'>
         <div className='flex flex-col gap-2'>
-          <h1 className='text-5xl font-bold'>{title}</h1>
-          <h2 className='text-xl'>{subtitle}</h2>
+          <h1 className='text-4xl md:text-5xl font-bold'>{title}</h1>
+          <h2 className='text-lg md:text-xl'>{subtitle}</h2>
         </div>
         {buttonText &&
           <Link href="/contact" className="py-2 px-4 bg-[#FFF951] w-fit rounded-md">
