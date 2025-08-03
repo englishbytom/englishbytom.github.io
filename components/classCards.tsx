@@ -5,6 +5,7 @@ import { Users, CalendarCheck2, GraduationCap, User, Edit } from 'lucide-react';
 const cardData = [
   {
     id: "grupales",
+    link: "/cursos-grupales",
     title: "Cursos Grupales",
     text: "Clases dinámicas, accesibles y motivadoras de mejorar tu inglés junto a otras personas con intereses similares.",
     title_icon: <Users color="black" size={24} />,
@@ -13,6 +14,7 @@ const cardData = [
   },
   {
     id: "unt",
+    link: "/cursos-para-la-unt",
     title: "Cursos para la UNT",
     text: "Estas clases son enfocadas en reforzar lo que ves en clase, pero en un entorno más práctico y participativo.",
     title_icon: <GraduationCap color="black" size={24} />,
@@ -21,6 +23,7 @@ const cardData = [
   },
   {
     id: "individuales",
+    link: "/clases-individuales",
     title: "Clases Individuales",
     text: "Se adaptan completamente a tus objetivos: ya sea mejorar la conversación, preparar un examen...",
     title_icon: <User color="black" size={24} />,
@@ -44,12 +47,14 @@ export const ClassCards = ({ types = ["grupales", "unt", "individuales"] }: { ty
 const Card = ({
   title,
   text,
+  link,
   title_icon,
   note_icon,
   note,
 }: {
   title: string;
   text: string;
+  link: string;
   title_icon: React.ReactNode;
   note_icon: React.ReactNode;
   note: string;
@@ -68,7 +73,7 @@ const Card = ({
         </div>
       </div>
       <Button asChild className="w-fit">
-        <Link href="/">
+        <Link href={link}>
           Saber más
         </Link>
       </Button>

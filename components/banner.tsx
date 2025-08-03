@@ -13,20 +13,35 @@ export default function Banner() {
       subtitle: "Ya seas estudiante o profesional, estoy para ayudarte a avanzar",
       buttonText: "Consultame"
     },
-    "/about": {
-      title: "About Tom",
-      subtitle: "Discover the story behind the classes",
+    "/sobre": {
+      title: "Tom Frame",
+      subtitle: "Profesor de inglés",
       buttonText: null,
     },
-    "/contact": {
-      title: "Contact",
-      subtitle: "Get in touch with Tom today",
+    "/contacto": {
+      title: "Contacto",
+      subtitle: "Escribime tu consulta y nos contactaremos a la brevedad",
+      buttonText: null,
+    },
+    "/cursos-grupales": {
+      title: "Cursos Grupales",
+      subtitle: "Mejorar tu inglés junto a otras personas",
+      buttonText: null,
+    },
+    "/cursos-para-la-unt": {
+      title: "Cursos para la UNT",
+      subtitle: "Clases enfocadas en reforzar lo que ves en clase",
+      buttonText: null,
+    },
+    "/clases-individuales": {
+      title: "Clases Individuales",
+      subtitle: "Las clases se adaptan completamente a tus objetivos",
       buttonText: null,
     },
     // fallback
     default: {
-      title: "Learn English with Tom",
-      subtitle: "",
+      title: "Lográ tus objetivos de inglés",
+      subtitle: "Ya seas estudiante o profesional, estoy para ayudarte a avanzar",
       buttonText: null,
     },
   };
@@ -56,7 +71,7 @@ export default function Banner() {
         </div>
         {buttonText &&
           <Button asChild variant="yellow" className="w-fit">
-            <Link href="/contact" >{buttonText}</Link>
+            <Link href="/contacto" >{buttonText}</Link>
           </Button>
         }
       </div>

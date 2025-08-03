@@ -1,8 +1,12 @@
+'use client';
+
 import * as React from "react"
+import { useState } from "react";
 import Link from "next/link"
 import { Button } from "./ui/button";
 import Banner from "./banner"
 import { Menu } from "lucide-react";
+import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu"
 
 import {
   NavigationMenu,
@@ -11,15 +15,18 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-  navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
+import { useRouter } from "next/navigation";
 
 
 export default function Header() {
   return (
     <div className="w-full flex flex-col items-center">
       <header className="flex responsive-container py-4 justify-between items-center">
-        <h6>English by Tom</h6>
+
+        <Link href="/" className="p-2">
+          <h6>English by Tom</h6>
+        </Link>
 
         <nav>
           <Menu color="black" size={24} className="flex md:hidden" />
@@ -28,51 +35,17 @@ export default function Header() {
               <Link href="/" className="nav-link">Inicio</Link>
             </li>
             <li>
-              <Link href="/" className="nav-link">Sobre Mi</Link>
+              <Link href="/sobre" className="nav-link">Sobre Mi</Link>
             </li>
             {/* <li>
               <Link href="/" className="py-2 px-4">Blog</Link>
             </li> */}
             <li>
-              <NavigationMenu>
-                <NavigationMenuList>
-                  <NavigationMenuItem>
-                    <NavigationMenuTrigger>Clases Online</NavigationMenuTrigger>
-                    <NavigationMenuContent>
-                      <ul className="grid w-[200px] p-1">
-                        <li>
-                          <Link
-                            href="#"
-                            className="shadcn-navigation-menu-link"
-                          >
-                            Cursos Grupales
-                          </Link>
-                        </li>
-                        <li>
-                          <Link
-                            href="#"
-                            className="shadcn-navigation-menu-link"
-                          >
-                            Cursos para la UNT
-                          </Link>
-                        </li>
-                        <li>
-                          <Link
-                            href="#"
-                            className="shadcn-navigation-menu-link"
-                          >
-                            Clases Individuales
-                          </Link>
-                        </li>
-                      </ul>
-                    </NavigationMenuContent>
-                  </NavigationMenuItem>
-                </NavigationMenuList>
-              </NavigationMenu>
+              <NavMenu />
             </li>
             <li>
               <Button asChild variant="yellow" className="w-fit">
-                <Link href="/contact" >Contacto</Link>
+                <Link href="/contacto" >Contacto</Link>
               </Button>
             </li>
           </ul>
@@ -83,6 +56,64 @@ export default function Header() {
   )
 }
 
+const NavMenu = () => {
+const handleLinkClick = () => {
+    // Let the Radix internal menu close after click
+    setTimeout(() => {
+      const trigger = document.activeElement as HTMLElement
+      if (trigger && trigger.blur) trigger.blur()
+    }, 0)
+  }
+
+  return (
+  <NavigationMenu>
+      <NavigationMenuList>
+        <NavigationMenuItem>
+          <NavigationMenuTrigger>
+            Clases Online
+          </NavigationMenuTrigger>
+          <NavigationMenuContent>
+            <ul className="grid w-[200px] p-1">
+              <li>
+                <NavigationMenuLink asChild>
+                  <Link
+                    href="/cursos-grupales"
+                    className="shadcn-navigation-menu-link"
+                    onClick={handleLinkClick}
+                  >
+                    Cursos Grupales
+                  </Link>
+                </NavigationMenuLink>
+              </li>
+              <li>
+                <NavigationMenuLink asChild>
+                  <Link
+                    href="/cursos-para-la-unt"
+                    className="shadcn-navigation-menu-link"
+                    onClick={handleLinkClick}
+                  >
+                    Cursos para la UNT
+                  </Link>
+                </NavigationMenuLink>
+              </li>
+              <li>
+                <NavigationMenuLink asChild>
+                  <Link
+                    href="/clases-individuales"
+                    className="shadcn-navigation-menu-link"
+                    onClick={handleLinkClick}
+                  >
+                    Clases Individuales
+                  </Link>
+                </NavigationMenuLink>
+              </li>
+            </ul>
+          </NavigationMenuContent>
+        </NavigationMenuItem>
+      </NavigationMenuList>
+    </NavigationMenu>
+  )
+}
 
 
 
