@@ -3,21 +3,16 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
-
-import { Button } from "@/components/ui/button"
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-
+import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
-
 import {
   Select,
   SelectContent,
@@ -26,171 +21,222 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 
+import { useState } from "react"
+import useWeb3Forms from "@web3forms/react"
+import HCaptcha from '@hcaptcha/react-hcaptcha';
+
+// 1. Zod schema
 const formSchema = z.object({
-  nombre: z.string().min(2, {
-    message: "Tu nombre debe tener al menos 2 caracteres.",
-  }),
-  apellido: z.string().min(2, {
-    message: "Tu apellido debe tener al menos 2 caracteres.",
-  }),
-  correo: z.email({
-    message: "No parece correcto.",
-  }),
-  telefono: z.number().min(10, {
-    message: "Tu numero de telefono debe tener 10 numeros"
-  }),
+  nombre: z.string().min(2, "Tu nombre debe tener al menos 2 caracteres."),
+  apellido: z.string().min(2, "Tu apellido debe tener al menos 2 caracteres."),
+  correo: z.email("No parece correcto."),
+  telefono: z.string().min(10, "Tu número de teléfono debe tener 10 números."),
   clase: z.string().nonempty("Campo obligatorio"),
   nivel: z.string().nonempty("Campo obligatorio"),
-  mensaje: z.string().max(600, {
-    message: "No podes escribir más que 600 caracteres aqui.",
-  }),
+  mensaje: z.string().max(600, "No podés escribir más que 600 caracteres aquí."),
 })
 
-export default function Contact() {
+type FormValues = z.infer<typeof formSchema>
 
-  // 1. Define your form.
-  const form = useForm<z.infer<typeof formSchema>>({
+export default function Contact() {
+  const accessKey = "597c551f-db35-46cf-87ea-621745939468"
+
+  const [message, setMessage] = useState<string | null>(null)
+  const [isSuccess, setIsSuccess] = useState<boolean | null>(null)
+
+  const { setValue } = useForm();
+
+  // 2. Main form
+  const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       nombre: "",
       apellido: "",
       correo: "",
-      telefono: 0,
+      telefono: "",
       clase: "",
       nivel: "",
-      mensaje: ""
+      mensaje: "",
     },
   })
 
-  // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values)
+  // 3. Web3Forms submit
+  const { submit } = useWeb3Forms({
+    access_key: accessKey,
+    settings: {
+      from_name: "Acme Inc",
+      subject: "Nuevo mensaje del formulario",
+    },
+    onSuccess: (msg) => {
+      setIsSuccess(true)
+      setMessage(msg)
+      form.reset()
+    },
+    onError: (msg) => {
+      setIsSuccess(false)
+      setMessage(msg)
+    },
+  })
+
+  // 4. Handler
+  const handleSubmit = (data: FormValues) => {
+    submit(data)
   }
 
-  return (
-    <>
-      <section className="section">
-        <h3 className="h3">¡Dejame tu mensaje!</h3>
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)}
-            className="border p-4 grid grid-cols-1 sm:grid-cols-2 gap-4 w-full"
-          >
-            <FormField
-              control={form.control}
-              name="nombre"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Input placeholder="Nombre *" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="apellido"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Input placeholder="Apellido *" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="correo"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Input placeholder="Correo *" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="telefono"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Input placeholder="Teléfono *" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="clase"
-              render={({ field }) => (
-                <FormItem>
-                  <Select onValueChange={field.onChange}>
-                    <FormControl className="w-full">
-                      <SelectTrigger>
-                        <SelectValue placeholder="Tipo de clase *" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      <SelectItem value="grupales">Cursos Grupales</SelectItem>
-                      <SelectItem value="unt">Cursos para la UNT</SelectItem>
-                      <SelectItem value="individuales">Clases Individuales</SelectItem>
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="nivel"
-              render={({ field }) => (
-                <FormItem>
-                  <Select onValueChange={field.onChange}>
-                    <FormControl className="w-full">
-                      <SelectTrigger>
-                        <SelectValue placeholder="Su nivel de inglés *" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      <SelectItem value="1">Nunca estudié</SelectItem>
-                      <SelectItem value="2">Hablo con dificultad</SelectItem>
-                      <SelectItem value="3">Hablo en presente y con frases simples</SelectItem>
-                      <SelectItem value="4">Hablo en pasado y de deseos</SelectItem>
-                      <SelectItem value="5">Hablo de historias con todos los pasados</SelectItem>
-                      <SelectItem value="6">Debato bien, falta expresividad</SelectItem>
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="mensaje"
-              render={({ field }) => (
-                <FormItem className="sm:col-span-2">
-                  <FormControl>
-                    <Textarea
-                      placeholder="Escribi tu mensaje aqui"
-                      className="resize-none"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <Button type="submit" className="w-fit">Enviar</Button>
-          </form>
-        </Form>
+  // Captcha
+  const onHCaptchaChange = (token: any) => {
+    setValue("h-captcha-response", token);
+  };
 
-      </section>
-    </>
+  return (
+    <section className="section">
+      <h3 className="h3">¡Dejame tu mensaje!</h3>
+
+      <Form {...form}>
+        <form
+          onSubmit={form.handleSubmit(handleSubmit)}
+          className="border p-4 grid grid-cols-1 sm:grid-cols-2 gap-4 w-full"
+        >
+
+          <FormField
+            control={form.control}
+            name="nombre"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <Input placeholder="Nombre *" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="apellido"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <Input placeholder="Apellido *" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="correo"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <Input placeholder="Correo *" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="telefono"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <Input placeholder="Teléfono *" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="clase"
+            render={({ field }) => (
+              <FormItem>
+                <Select onValueChange={field.onChange} value={field.value}>
+                  <FormControl className="w-full">
+                    <SelectTrigger>
+                      <SelectValue placeholder="Tipo de clase *" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem value="grupales">Cursos Grupales</SelectItem>
+                    <SelectItem value="unt">Cursos para la UNT</SelectItem>
+                    <SelectItem value="individuales">Clases Individuales</SelectItem>
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="nivel"
+            render={({ field }) => (
+              <FormItem>
+                <Select onValueChange={field.onChange} value={field.value}>
+                  <FormControl className="w-full">
+                    <SelectTrigger>
+                      <SelectValue placeholder="Su nivel de inglés *" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem value="1">Nunca estudié</SelectItem>
+                    <SelectItem value="2">Hablo con dificultad</SelectItem>
+                    <SelectItem value="3">Hablo en presente y con frases simples</SelectItem>
+                    <SelectItem value="4">Hablo en pasado y de deseos</SelectItem>
+                    <SelectItem value="5">Hablo de historias con todos los pasados</SelectItem>
+                    <SelectItem value="6">Debato bien, falta expresividad</SelectItem>
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="mensaje"
+            render={({ field }) => (
+              <FormItem className="sm:col-span-2">
+                <FormControl>
+                  <Textarea placeholder="Escribí tu mensaje aquí" className="resize-none" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <div className="flex flex-row items-center gap-4">
+            <Button type="submit" className="w-fit" disabled={form.formState.isSubmitting}>
+              Enviar
+            </Button>
+
+            {isSuccess === true && (
+              <p className="text-sm text-center text-green-600">
+                {"Mensaje enviado con éxito."}
+              </p>
+            )}
+            {isSuccess === false && (
+              <p className="text-sm text-red-600">
+                {"Ocurrió un error. Intente más tarde."}
+              </p>
+            )}
+          </div>
+
+          <HCaptcha
+            sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2"
+            reCaptchaCompat={false}
+            onVerify={onHCaptchaChange}
+          />
+        </form>
+      </Form>
+
+
+
+    </section>
   )
 }

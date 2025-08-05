@@ -25,7 +25,7 @@ export default function IndividualClass() {
       </section>
       <section className="section">
         <h3 className="h3">Preguntas Frecuentes</h3>
-        <FAQ />
+        <FAQ types={["individuales"]} />
       </section>
 
     </>
