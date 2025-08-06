@@ -64,7 +64,7 @@ export default function Contact() {
   const { submit } = useWeb3Forms({
     access_key: accessKey,
     settings: {
-      from_name: "Acme Inc",
+      from_name: "English by Tom",
       subject: "Nuevo mensaje del formulario",
     },
     onSuccess: (msg) => {
@@ -180,7 +180,7 @@ export default function Contact() {
                 <Select onValueChange={field.onChange} value={field.value}>
                   <FormControl className="w-full">
                     <SelectTrigger>
-                      <SelectValue placeholder="Su nivel de inglés *" />
+                      <SelectValue placeholder="Su nivel de inglés *" className="text-base!" />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
@@ -210,28 +210,31 @@ export default function Contact() {
             )}
           />
 
-          <div className="flex flex-row items-center gap-4">
-            <Button type="submit" className="w-fit" disabled={form.formState.isSubmitting}>
-              Enviar
-            </Button>
+          <div className="flex flex-col gap-4">
+            <HCaptcha
+              sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2"
+              reCaptchaCompat={false}
+              onVerify={onHCaptchaChange}
+              languageOverride="es"
+            />
+            <div className="flex flex-row items-center gap-4">
+              <Button type="submit" className="w-fit" disabled={form.formState.isSubmitting}>
+                Enviar
+              </Button>
 
-            {isSuccess === true && (
-              <p className="text-sm text-center text-green-600">
-                {"Mensaje enviado con éxito."}
-              </p>
-            )}
-            {isSuccess === false && (
-              <p className="text-sm text-red-600">
-                {"Ocurrió un error. Intente más tarde."}
-              </p>
-            )}
+              {isSuccess === true && (
+                <p className="text-sm text-center text-green-600">
+                  {"Mensaje enviado con éxito."}
+                </p>
+              )}
+              {isSuccess === false && (
+                <p className="text-sm text-red-600">
+                  {"Ocurrió un error. Intente más tarde."}
+                </p>
+              )}
+            </div>
           </div>
 
-          <HCaptcha
-            sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2"
-            reCaptchaCompat={false}
-            onVerify={onHCaptchaChange}
-          />
         </form>
       </Form>
 

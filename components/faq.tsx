@@ -20,7 +20,7 @@ const faqData: FAQItem[] = [
     answer: (
       <>
         Todas las clases se hacen por <b>Google Meet</b>, una plataforma simple y accesible desde cualquier dispositivo.
-        Una vez que reserves tu lugar, vas a recibir por email el link de acceso para conectarte. No hace falta que instales
+        Una vez que reserves tu lugar, vas a recibir por correo el link de acceso para conectarte. No hace falta que instales
         nada si usás una computadora — solo necesitás tener una buena conexión a internet. Si usás celular o tablet, podés
         descargar la app gratuita de Google Meet.
       </>
@@ -34,7 +34,7 @@ const faqData: FAQItem[] = [
       <>
         Los niveles que uso para organizar las clases siguen el Marco Común Europeo de Referencia para las Lenguas (MCER), una guía internacional
         que clasifica el dominio del idioma desde A1 (principiante) hasta C2 (avanzado). Esta escala permite saber con claridad qué puede hacer una persona
-        en inglés en cada etapa — por ejemplo: presentarse, mantener una conversación, escribir un mail formal, entender textos complejos, etc.
+        en inglés en cada etapa — por ejemplo: presentarse, mantener una conversación, escribir un correo formal, entender textos complejos, etc.
         Antes de empezar, evaluamos tu nivel para que puedas aprender con materiales y actividades acordes a tus conocimientos y objetivos.
       </>
     ),
