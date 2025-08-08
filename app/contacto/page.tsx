@@ -34,6 +34,7 @@ const formSchema = z.object({
   clase: z.string().nonempty("Campo obligatorio"),
   nivel: z.string().nonempty("Campo obligatorio"),
   mensaje: z.string().max(600, "No podés escribir más que 600 caracteres aquí."),
+  "h-captcha-response": z.string().nonempty("Captcha obligatorio"),
 })
 
 type FormValues = z.infer<typeof formSchema>
@@ -41,10 +42,8 @@ type FormValues = z.infer<typeof formSchema>
 export default function Contact() {
   const accessKey = "597c551f-db35-46cf-87ea-621745939468"
 
-  const [message, setMessage] = useState<string | null>(null)
   const [isSuccess, setIsSuccess] = useState<boolean | null>(null)
-
-  const { setValue } = useForm();
+  // const { setValue } = useForm();
 
   // 2. Main form
   const form = useForm<FormValues>({
@@ -57,7 +56,9 @@ export default function Contact() {
       clase: "",
       nivel: "",
       mensaje: "",
+      "h-captcha-response": "",
     },
+    shouldUnregister: false, // <- keeps hidden/unmounted fields in state
   })
 
   // 3. Web3Forms submit
@@ -69,12 +70,10 @@ export default function Contact() {
     },
     onSuccess: (msg) => {
       setIsSuccess(true)
-      setMessage(msg)
       form.reset()
     },
     onError: (msg) => {
       setIsSuccess(false)
-      setMessage(msg)
     },
   })
 
@@ -85,7 +84,7 @@ export default function Contact() {
 
   // Captcha
   const onHCaptchaChange = (token: any) => {
-    setValue("h-captcha-response", token);
+    form.setValue("h-captcha-response", token, { shouldValidate: true });
   };
 
   return (
@@ -216,6 +215,7 @@ export default function Contact() {
               reCaptchaCompat={false}
               onVerify={onHCaptchaChange}
               languageOverride="es"
+              
             />
             <div className="flex flex-row items-center gap-4">
               <Button type="submit" className="w-fit" disabled={form.formState.isSubmitting}>
