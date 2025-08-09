@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
-    "predeploy": "next build && cp CNAME build/",
+    "predeploy": "next build && copy CNAME build/",
     "deploy": "gh-pages -d out",
     "start": "next start",
     "lint": "next lint"
