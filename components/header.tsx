@@ -24,7 +24,11 @@ import {
 } from "@/components/ui/drawer"
 import { useState } from "react";
 
+import { useTranslations } from 'next-intl';
+
 export default function Header() {
+  const t = useTranslations('Links');
+
   return (
     <div className="w-full flex flex-col items-center">
       <header className="flex responsive-container py-4 justify-between items-center">
@@ -35,10 +39,13 @@ export default function Header() {
               <Link href="/" className="p-4 font-medium">English by Tom</Link>
             </li>
             <li>
-              <Link href="/sobre" className="nav-link">Sobre Mi</Link>
+              <Link href="/about" className="nav-link">{t('about')}</Link>
             </li>
             <li>
-              <Link href="/blog" className="nav-link">Blog</Link>
+              <Link href="/blog" className="nav-link">{t('blog')}</Link>
+            </li>
+            <li>
+              <Link href="/community" className="nav-link">{t('community')}</Link>
             </li>
             <li>
               <NavMenu />
@@ -46,7 +53,7 @@ export default function Header() {
           </ul>
         </nav>
         <Button asChild variant="yellow" className="w-fit">
-          <Link href="/contacto" >Contacto</Link>
+          <Link href="/contact" >{t('contact')}</Link>
         </Button>
       </header>
       <Banner />
@@ -55,6 +62,8 @@ export default function Header() {
 }
 
 const NavMenu = () => {
+  const t = useTranslations('Links');
+
   const handleLinkClick = () => {
     // Let the Radix internal menu close after click
     setTimeout(() => {
@@ -68,40 +77,40 @@ const NavMenu = () => {
       <NavigationMenuList>
         <NavigationMenuItem>
           <NavigationMenuTrigger>
-            Clases
+            {t('classes.classes')}
           </NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid w-[200px] p-1">
               <li>
                 <NavigationMenuLink asChild>
                   <Link
-                    href="/cursos-grupales"
+                    href="/classes/group"
                     className="shadcn-navigation-menu-link"
                     onClick={handleLinkClick}
                   >
-                    Cursos Grupales
+                    {t('classes.group')}
                   </Link>
                 </NavigationMenuLink>
               </li>
               <li>
                 <NavigationMenuLink asChild>
                   <Link
-                    href="/cursos-para-la-unt"
+                    href="/classes/unt"
                     className="shadcn-navigation-menu-link"
                     onClick={handleLinkClick}
                   >
-                    Cursos para la UNT
+                    {t('classes.unt')}
                   </Link>
                 </NavigationMenuLink>
               </li>
               <li>
                 <NavigationMenuLink asChild>
                   <Link
-                    href="/clases-individuales"
+                    href="/classes/individual"
                     className="shadcn-navigation-menu-link"
                     onClick={handleLinkClick}
                   >
-                    Clases Individuales
+                    {t('classes.individual')}
                   </Link>
                 </NavigationMenuLink>
               </li>
@@ -114,7 +123,8 @@ const NavMenu = () => {
 }
 
 const NavDrawer = () => {
-  const [open, setOpen] = useState(false)
+  const t = useTranslations('Links');
+  const [open, setOpen] = useState(false);
 
   const handleClose = () => {
     setOpen(false)
@@ -127,7 +137,7 @@ const NavDrawer = () => {
       </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader className="flex flex-row items-center justify-between">
-          
+
           <DrawerClose className="flex size-[30px] items-center justify-center">
             <Menu color="black" size={24} />
           </DrawerClose>
@@ -137,26 +147,29 @@ const NavDrawer = () => {
         <div>
           <ul className="flex flex-col items-center gap-4">
             <li>
-              <Link href="/" className="nav-link" onClick={handleClose}>Inicio</Link>
+              <Link href="/" className="nav-link" onClick={handleClose}>{t('home')}</Link>
             </li>
             <li>
-              <Link href="/sobre" className="nav-link" onClick={handleClose}>Sobre Mi</Link>
+              <Link href="/about" className="nav-link" onClick={handleClose}>{t('about')}</Link>
             </li>
             <li>
-              <Link href="/blog" className="nav-link" onClick={handleClose}>Blog</Link>
+              <Link href="/blog" className="nav-link" onClick={handleClose}>{t('blog')}</Link>
             </li>
             <li>
-              <Link href="/cursos-grupales" className="nav-link" onClick={handleClose}>Cursos Grupales</Link>
+              <Link href="/community" className="nav-link" onClick={handleClose}>{t('community')}</Link>
             </li>
             <li>
-              <Link href="/cursos-para-la-unt" className="nav-link" onClick={handleClose}>Cursos Para la UNT</Link>
+              <Link href="/classes/group" className="nav-link" onClick={handleClose}>{t('classes.group')}</Link>
             </li>
             <li>
-              <Link href="/clases-individuales" className="nav-link" onClick={handleClose}>Clases Individuales</Link>
+              <Link href="/classes/unt" className="nav-link" onClick={handleClose}>{t('classes.unt')}</Link>
+            </li>
+            <li>
+              <Link href="/classes/individual" className="nav-link" onClick={handleClose}>{t('classes.individual')}</Link>
             </li>
             <li>
               <Button asChild variant="yellow" className="w-fit">
-                <Link href="/contacto" onClick={handleClose}>Contacto</Link>
+                <Link href="/contact" onClick={handleClose}>{t('contact')}</Link>
               </Button>
             </li>
           </ul>

@@ -16,18 +16,11 @@ export default function IndividualClass() {
         <p><b>Costo: </b>$25.000 ARS por hora</p>
         <DetailCards />
         <Button asChild variant="yellow" className="w-fit">
-          <Link href="/contacto" >Consultame</Link>
+          <Link href="/contact" >Consultame</Link>
         </Button>
       </section>
-      <section className="section">
-        <h3 className="h3">Otras tipos de clases</h3>
-        <ClassCards types={["unt", "grupales"]} />
-      </section>
-      <section className="section">
-        <h3 className="h3">Preguntas Frecuentes</h3>
-        <FAQ types={["individuales"]} />
-      </section>
-
+      <ClassCards title={["2"]} types={["unt", "grupales"]} />
+      <FAQ types={["individual"]} />
     </>
   )
 }

@@ -29,10 +29,10 @@ export default function About() {
         </p>
 
       </section>
-      <section className="section">
+      {/* <section className="section">
         <h3 className="h3">Testimoniales</h3>
         <TestimonialCards />
-      </section>
+      </section> */}
     </>
   )
 }

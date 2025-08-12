@@ -2,6 +2,8 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button";
 import { Users, CalendarCheck2, GraduationCap, User, Edit } from 'lucide-react';
 
+import { useTranslations } from 'next-intl';
+
 const cardData = [
   {
     id: "grupales",
@@ -32,15 +34,25 @@ const cardData = [
   },
 ];
 
-export const ClassCards = ({ types = ["grupales", "unt", "individuales"] }: { types?: string[] }) => {
+export const ClassCards = ({
+  title = ["1", "2"],
+  types = ["grupales", "unt", "individuales"],
+}: { types?: string[], title?: string[] }) => {
   const filteredCards = cardData.filter((card) => types.includes(card.id));
 
+  const t = useTranslations('ClassCards');
+
   return (
-    <div className="flex flex-col lg:flex-row gap-4 w-full">
-      {filteredCards.map((card) => (
-        <Card key={card.id} {...card} />
-      ))}
-    </div>
+    <section className="section">
+      <h3 className="h3">
+        {title[0] === "1" ? t('title') : t('title2')}
+      </h3>
+      <div className="flex flex-col lg:flex-row gap-4 w-full">
+        {filteredCards.map((card) => (
+          <Card key={card.id} {...card} />
+        ))}
+      </div>
+    </section>
   );
 };
 
@@ -59,6 +71,7 @@ const Card = ({
   note_icon: React.ReactNode;
   note: string;
 }) => {
+
   return (
     <div className="flex flex-col bg-primary-card rounded-md px-4 py-4 w-full gap-y-4 justify-between">
       <div className="flex flex-col gap-y-2">

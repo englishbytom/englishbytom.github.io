@@ -16,18 +16,11 @@ export default function GroupClass() {
         <p><b>Costo: </b>$40.000 ARS por mes (4 clases)</p>
         <DetailCards />
         <Button asChild variant="yellow" className="w-fit">
-          <Link href="/contacto" >Consultame</Link>
+          <Link href="/contact" >Consultame</Link>
         </Button>
       </section>
-      <section className="section">
-        <h3 className="h3">Otras tipos de clases</h3>
-        <ClassCards types={["unt", "individuales"]} />
-      </section>
-      <section className="section">
-        <h3 className="h3">Preguntas Frecuentes</h3>
-  <FAQ types={["grupales"]} />
-      </section>
-
+      <ClassCards title={["2"]} types={["unt", "individuales"]} />
+      <FAQ types={["group"]} />
     </>
   )
 }

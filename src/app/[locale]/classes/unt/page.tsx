@@ -11,23 +11,16 @@ export default function UntClass() {
       <section className="section">
         <h3 className="h3">Detalles</h3>
         <p>
-         Estas clases están diseñadas especialmente para estudiantes de la Universidad Nacional de Tucumán que necesitan apoyo extra con las materias de inglés de la facultad. Nos enfocamos en explicar los temas gramaticales que suelen generar más dudas, practicar los contenidos que se ven en clase, y preparar a los estudiantes para rendir con confianza. El objetivo es ayudarte a entender mejor lo que se trabaja en la cursada, reforzar puntos clave, y darte herramientas concretas para que llegues bien preparado a los parciales y finales.
+          Estas clases están diseñadas especialmente para estudiantes de la Universidad Nacional de Tucumán que necesitan apoyo extra con las materias de inglés de la facultad. Nos enfocamos en explicar los temas gramaticales que suelen generar más dudas, practicar los contenidos que se ven en clase, y preparar a los estudiantes para rendir con confianza. El objetivo es ayudarte a entender mejor lo que se trabaja en la cursada, reforzar puntos clave, y darte herramientas concretas para que llegues bien preparado a los parciales y finales.
         </p>
         <p><b>Costo: </b>$60.000 ARS por mes (8 clases)</p>
         <DetailCards />
         <Button asChild variant="yellow" className="w-fit">
-          <Link href="/contacto" >Consultame</Link>
+          <Link href="/contact" >Consultame</Link>
         </Button>
       </section>
-      <section className="section">
-        <h3 className="h3">Otras tipos de clases</h3>
-        <ClassCards types={["grupales", "individuales"]} />
-      </section>
-      <section className="section">
-        <h3 className="h3">Preguntas Frecuentes</h3>
-   <FAQ types={["unt"]} />
-      </section>
-
+      <ClassCards title={["2"]} types={["grupales", "individuales"]} />
+      <FAQ types={["unt"]} />
     </>
   )
 }
@@ -47,7 +40,7 @@ const DetailCards = () => {
         icon={<ClipboardPenLine size={30} />}
         text={`Apoyo en exámenes`}
       />
-        <ClassDetailCard
+      <ClassDetailCard
         icon={<CheckCircle size={30} />}
         text={`Practica dirigida`}
       />

@@ -29,27 +29,27 @@ export default function Banner() {
       subtitle: t('home.subtitle'),
       buttonText: t('home.button')
     },
-    "/sobre": {
+    "/about": {
       title: "Tom Frame",
       subtitle: "Profesor de inglés",
       buttonText: null,
     },
-    "/contacto": {
+    "/contact": {
       title: "Contacto",
       subtitle: "Escribime tu consulta y nos contactaremos a la brevedad",
       buttonText: null,
     },
-    "/cursos-grupales": {
+    "/classes/group": {
       title: "Cursos Grupales",
       subtitle: "Mejorar tu inglés junto a otras personas",
       buttonText: null,
     },
-    "/cursos-para-la-unt": {
+    "/classes/unt": {
       title: "Cursos para la UNT",
       subtitle: "Clases enfocadas en reforzar lo que ves en clase",
       buttonText: null,
     },
-    "/clases-individuales": {
+    "/classes/individual": {
       title: "Clases Individuales",
       subtitle: "Las clases se adaptan completamente a tus objetivos",
       buttonText: null,
@@ -96,7 +96,7 @@ export default function Banner() {
         </div>
         {buttonText &&
           <Button asChild variant="yellow" className="w-fit">
-            <Link href="/contacto" >{buttonText}</Link>
+            <Link href="/contact" >{buttonText}</Link>
           </Button>
         }
       </div>
