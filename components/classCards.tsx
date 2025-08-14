@@ -46,14 +46,14 @@ export const ClassCards = ({
   const t = useTranslations("ClassCards");
 
   return (
-    <section className="section">
+    <div className="container-fluid">
       <h2>{title[0] === "1" ? t("title") : t("title2")}</h2>
       <div className="flex flex-col lg:flex-row gap-4 w-full">
         {filteredCards.map((card) => (
           <Card key={card.id} {...card} />
         ))}
       </div>
-    </section>
+    </div>
   );
 };
 
@@ -75,9 +75,9 @@ const Card = ({
   return (
     <div className="flex flex-col bg-primary-card rounded-md px-4 py-4 w-full gap-y-4 justify-between">
       <div className="flex flex-col gap-y-2">
-        <div className="flex flex-row gap-x-2">
+        <div className="flex flex-row gap-x-2 prose-h4:m-0!">
           {title_icon}
-          <h4 className="prose-h4:m-4!">{title}</h4>
+          <h4>{title}</h4>
         </div>
         <small>{text}</small>
         <div className="flex flex-row gap-x-2 items-center">

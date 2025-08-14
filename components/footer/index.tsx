@@ -1,50 +1,120 @@
-import * as React from "react"
-import Image from "next/image"
-import YoutubeIcon from './assets/YouTube.svg'
-import InstagramIcon from './assets/Instagram.svg'
-import FacebookIcon from './assets/Facebook.svg'
+"use client";
+
+import Image from "next/image";
+import { Separator } from "@/components/ui/separator";
+import { footerContent } from "./content/en";
+import { FormProvider, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { FormField, FormItem, FormControl, FormMessage } from "../ui/form";
+import { Input } from "../ui/input";
+import { Button } from "../ui/button";
 
 export default function Footer() {
   return (
-    <div className="w-full flex flex-col items-center mt-8">
-      <footer className="flex flex-col sm:flex-row responsive-container py-4 justify-between border-t-1">
-        <h6>English by Tom</h6>
-        <div className="flex flex-col gap-2">
-          <div className="flex flex-row">
-            <a href="https://www.youtube.com/@EnglishbyTomYT" rel="noopener noreferrer" target="_blank">
-              <Image
-                src={YoutubeIcon}
-                height="32"
-                width="32"
-                quality={100}
-                unoptimized={true}
-                alt="English by Tom Youtube channel"
-              />
-            </a>
-            {/* <a href="">
-            <Image
-              src={InstagramIcon}
-              height="32"
-              width="32"
-              quality={100}
-              unoptimized={true}
-              alt="English by Tom Youtube channel"
+    <footer className="flex flex-col items-center w-full mt-14 text-sm">
+      <div className="container-fluid">
+        <div className="flex flex-row gap-2 justify-between">
+          {footerContent.sections.map((section) => (
+            <FooterSection
+              key={section.title}
+              title={section.title}
+              items={section.items}
             />
-          </a> */}
-            <a href="https://www.facebook.com/englishbytom" rel="noopener noreferrer" target="_blank">
+          ))}
+
+          <div className="prose w-full flex md:flex-col">
+            <h4>{footerContent.newsletter.title}</h4>
+            <NewsletterForm />
+          </div>
+        </div>
+      </div>
+
+      <Separator className="my-8 w-full" />
+
+      <span>{footerContent.title}</span>
+
+      <ul className="flex flex-row items-center gap-6 py-4 list-none p-0">
+        {footerContent.links.map((link) => (
+          <li key={link.href}>
+            <a href={link.href}>{link.text}</a>
+          </li>
+        ))}
+
+        {footerContent.social.map((social) => (
+          <li key={social.href}>
+            <a href={social.href} target="_blank" rel="noopener noreferrer">
               <Image
-                src={FacebookIcon}
-                height="32"
-                width="32"
-                quality={100}
-                unoptimized={true}
-                alt="English by Tom Facebook Page"
+                src={social.icon}
+                height={32}
+                width={32}
+                alt={social.alt}
+                unoptimized
               />
             </a>
-          </div>
-          <small className="text-xs">© Copyright 2025 EnglishbyTom.com</small>
-        </div>
-      </footer>
-    </div>
-  )
+          </li>
+        ))}
+      </ul>
+    </footer>
+  );
 }
+
+function FooterSection({
+  title,
+  items,
+}: {
+  title: string;
+  items: { text: string; href: string }[];
+}) {
+  return (
+    <div className="prose w-full flex md:flex-col">
+      <h4>{title}</h4>
+      <ul className="flex flex-col list-none p-0!">
+        {items.map((item) => (
+          <li key={item.href} className="p-0! mt-0! text-sm">
+            <a href={item.href} className="font-normal!">
+              {item.text}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+const NewsletterForm = () => {
+  type FormValues = { email: string };
+  const formSchema = z.object({ email: z.string().email() });
+
+  const form = useForm<FormValues>({
+    resolver: zodResolver(formSchema),
+    defaultValues: { email: "" },
+  });
+
+  const handleSubmit = (data: FormValues) => console.log(data);
+
+  return (
+    <FormProvider {...form}>
+      <form
+        onSubmit={form.handleSubmit(handleSubmit)}
+        className="flex flex-col gap-3"
+      >
+        <FormField
+          name="email"
+          control={form.control}
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <Input placeholder="Email address" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <Button type="submit" className="w-fit">
+          Subscribe
+        </Button>
+      </form>
+    </FormProvider>
+  );
+};

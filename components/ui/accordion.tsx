@@ -26,7 +26,7 @@ function AccordionItem({
   return (
     <AccordionPrimitive.Item
       data-slot="accordion-item"
-      className={cn("bg-gray-100 rounded-md prose-h3:m-0!", className)}
+      className={cn("bg-white rounded-md prose-h3:m-0!", className)}
       {...props}
     />
   );
@@ -47,7 +47,7 @@ function AccordionTrigger({
         )}
         {...props}
       >
-       <h4>{children}</h4>
+       <h4 className="m-0!">{children}</h4>
         
         <ChevronDownIcon className="text-muted-foreground pointer-events-none size-4 shrink-0 translate-y-0.5 transition-transform duration-200" />
       </AccordionPrimitive.Trigger>

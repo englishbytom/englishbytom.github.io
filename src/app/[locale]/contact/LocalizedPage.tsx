@@ -9,7 +9,7 @@ export default function LocalizedPage() {
 
   useEffect(() => {
     import(`./content/${locale}.mdx`).then((module) => {
-      setContent(module.default || module.formContent);
+      setContent(module.default);
     });
   }, [locale]);
 

@@ -79,7 +79,8 @@ export default function Banner({ title, subtitle, button }: BannerContent) {
   // const { title, subtitle, buttonText } = getBannerContent(normalizedPath);
 
   return (
-    <div className="relative flex responsive-container px-2! md:px-8! h-fit items-center justify-center">
+    <div className="container-fluid">
+    <div className="relative flex px-2! md:px-8! h-fit">
       <Image
         src={BannerImg}
         style={{ objectFit: "cover" }}
@@ -88,13 +89,14 @@ export default function Banner({ title, subtitle, button }: BannerContent) {
         fill
         alt="Students at university"
       />
-      <div className="z-40 flex flex-col gap-4 responsive-container py-8">
+      <div className="z-40 flex flex-col gap-4 py-8">
         <div className="flex flex-col gap-0.5">
           <h1 className="mb-0!">{title}</h1>
           <p>{subtitle}</p>
         </div>
         {button}
       </div>
+    </div>
     </div>
   );
 }

@@ -2,36 +2,42 @@
 @import "tw-animate-css";
 @plugin "@tailwindcss/typography";
 
-p {
-  @apply m-0!
+@font-face {
+  font-family: "Shantell Sans";
+  font-weight: 600;
+  font-style: normal;
+  src: url("@/fonts/ShantellSans.ttf") format("truetype");
 }
 
-h2 {
-  @apply text-center
+/* Typography plugin */
+@utility prose {
+  --tw-prose-body: var(--color-primary);
+  --tw-prose-headings: var(--color-primary);
+  --tw-prose-bold: var(--color-primary);
+  --tw-prose-quote-borders: var(--color-slate-300);
+  --tw-prose-quotes: var(--color-muted-foreground);
+  --tw-prose-code: var(--color-primary);
+
+  p {
+    margin: 0;
+  }
+
+  h2 {
+    text-align: center;
+  }
+
+
+  a {
+    text-decoration: none;
+  }
 }
 
-h4 {
-  @apply m-0!
+.container-screen {
+  @apply w-screen! max-w-full items-center
 }
 
-a {
-  @apply no-underline
-}
-
-.responsive-container {
-  @apply w-full px-4 max-w-full sm:max-w-full md:px-[0px] md:max-w-2xl lg:max-w-3xl xl:max-w-5xl;
-}
-
-.shadcn-navigation-menu-link {
-  @apply data-[active=true]:focus:bg-accent data-[active=true]:hover:bg-accent data-[active=true]:bg-accent/50 data-[active=true]:text-accent-foreground hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus-visible:ring-ring/50 [&_svg:not([class*='text-'])]:text-muted-foreground flex flex-col gap-1 rounded-sm p-2 transition-all outline-none focus-visible:ring-[3px] [&_svg:not([class*='size-'])]:size-4
-}
-
-.nav-link {
-  @apply cursor-pointer py-2 px-4 rounded-md hover:bg-accent focus:bg-accent disabled:pointer-events-none disabled:opacity-50 data-[state=open]:hover:bg-accent data-[state=open]:text-accent-foreground data-[state=open]:focus:bg-accent data-[state=open]:bg-accent/50 focus-visible:ring-ring/50 outline-none transition-[color,box-shadow] focus-visible:ring-[3px]
-}
-
-.section {
-  @apply flex flex-col gap-4
+.container-fluid {
+  @apply w-full max-w-[1440px] px-[10px] md:px-10;
 }
 
 .image-overlay-container {
@@ -46,14 +52,11 @@ a {
   width: 100%;
   height: 100%;
   background: rgba(142, 167, 234, 0.855);
-  /* Red overlay with 50% opacity */
   z-index: 1;
-  /* Ensure the overlay is on top of the image */
 }
 
-@custom-variant dark (&:is(.dark *));
-
 @theme inline {
+  --font-shantell: "Shantell Sans", sans-serif;
   --color-yellow: var(--yellow);
   --color-primary-card: var(--primary-card);
   --color-background: var(--background);
@@ -96,7 +99,7 @@ a {
 }
 
 :root {
-  --yellow: #FFF951;
+  --yellow: #fff951;
   --primary-card: oklch(0.9314 0.0324 283.85);
   --radius: 0.625rem;
   --background: oklch(1 0 0);

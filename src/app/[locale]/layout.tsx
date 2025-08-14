@@ -39,7 +39,7 @@ export default async function LocaleLayout({
       <body className="flex flex-col items-center">
         <NextIntlClientProvider>
           <LocalizedNav />
-          <article className="prose md:prose-md lg:prose-lg responsive-container flex flex-col justify-start">
+          <article className="prose md:prose-md lg:prose-lg flex flex-col justify-start container-screen">
             {children}
           </article>
           <Footer />
