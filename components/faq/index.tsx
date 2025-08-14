@@ -19,7 +19,7 @@ export default function FAQ({
 }) {
   return (
     <>
-      <h3 className="h3">{title}</h3>
+      <h2>{title}</h2>
       <Accordion type="single" collapsible className="w-full sm:max-w-full md:max-w-2xl lg:max-w-3xl self-center">
         {items.map((faq, idx) => (
           <AccordionItem key={idx} value={`item-${idx}`}>

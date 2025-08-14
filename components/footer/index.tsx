@@ -1,8 +1,8 @@
 import * as React from "react"
 import Image from "next/image"
-import YoutubeIcon from './YouTube.svg'
-import InstagramIcon from './Instagram.svg'
-import FacebookIcon from './Facebook.svg'
+import YoutubeIcon from './assets/YouTube.svg'
+import InstagramIcon from './assets/Instagram.svg'
+import FacebookIcon from './assets/Facebook.svg'
 
 export default function Footer() {
   return (

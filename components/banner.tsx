@@ -83,15 +83,15 @@ export default function Banner({ title, subtitle, button }: BannerContent) {
       <Image
         src={BannerImg}
         style={{ objectFit: "cover" }}
-        className="opacity-15 rounded-md"
+        className="opacity-15 rounded-md m-0!"
         sizes="100vw"
         fill
         alt="Students at university"
       />
       <div className="z-40 flex flex-col gap-4 responsive-container py-8">
         <div className="flex flex-col gap-0.5">
-        <h1>{title}</h1>
-        <p className="tagline">{subtitle}</p>
+          <h1 className="mb-0!">{title}</h1>
+          <p>{subtitle}</p>
         </div>
         {button}
       </div>

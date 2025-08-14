@@ -39,12 +39,13 @@ export default async function LocaleLayout({
       <body className="flex flex-col items-center">
         <NextIntlClientProvider>
           <LocalizedNav />
-          <main className="responsive-container flex flex-col justify-start gap-y-8">
+          <article className="prose md:prose-md lg:prose-lg responsive-container flex flex-col justify-start">
             {children}
-          </main>
+          </article>
           <Footer />
         </NextIntlClientProvider>
       </body>
     </html>
   );
 }
+
