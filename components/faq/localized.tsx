@@ -13,7 +13,7 @@ export default function LocalizedFAQ() {
   } | null>(null);
 
   useEffect(() => {
-    import(`./content/${locale}.mdx`).then((module) => {
+    import(`./content/${locale}.js`).then((module) => {
       setFaqData({
         title: module.title, // get the exported title from MDX
         items: module.items, // get the exported items array

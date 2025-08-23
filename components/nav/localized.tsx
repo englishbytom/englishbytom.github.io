@@ -9,7 +9,7 @@ export default function LocalizedNav() {
   const [Content, setContent] = useState<any>(null);
 
   useEffect(() => {
-    import(`./content/${locale}.mdx`).then((module) => {
+    import(`./content/${locale}.md`).then((module) => {
       setContent(() => module.default); // assign default export as component
     });
   }, [locale]);
