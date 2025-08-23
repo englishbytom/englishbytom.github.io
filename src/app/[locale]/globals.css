@@ -6,7 +6,7 @@
   font-family: "Shantell Sans";
   font-weight: 600;
   font-style: normal;
-  src: url("@/fonts/ShantellSans.ttf") format("truetype");
+  src: url("../../../fonts/ShantellSans.ttf") format("truetype");
 }
 
 /* Typography plugin */
