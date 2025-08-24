@@ -18,6 +18,10 @@ export const metadata: Metadata = {
   description: "Learn English with Tom",
 };
 
+export async function generateStaticParams() {
+  return [{ locale: "en" }];
+}
+
 export default async function LocaleLayout({
   children,
   params,
