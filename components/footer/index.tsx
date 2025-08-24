@@ -14,7 +14,7 @@ export default function Footer() {
   return (
     <footer className="flex flex-col items-center w-full mt-14 text-sm">
       <div className="container-fluid">
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3  gap-4">
           {footerContent.sections.map((section) => (
             <FooterSection
               key={section.title}

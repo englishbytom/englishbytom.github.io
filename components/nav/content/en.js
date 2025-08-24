@@ -4,5 +4,5 @@ export const items = [
   <a href="/" className={style}>Home</a>,
   <a href="/community" className={style}>Community</a>,
   <a href="/classes/individual" className={style}>Classes</a>,
-  <a href="/blog" className={style}>Blog</a>,
+  // <a href="/blog" className={style}>Blog</a>,
 ];

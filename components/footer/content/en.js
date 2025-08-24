@@ -19,13 +19,13 @@ export const footerContent = {
         { text: "Discord", href: "https://discord.gg/wQ63ZPvCTk" },
       ],
     },
-    {
-      title: "Resources",
-      items: [
-        { text: "Blog", href: "/blog" },
-        // { text: "Help Center", href: "/help" },
-      ],
-    },
+    // {
+    //   title: "Resources",
+    //   items: [
+    //     { text: "Blog", href: "/blog" },
+    //     // { text: "Help Center", href: "/help" },
+    //   ],
+    // },
     {
       title: "More",
       items: [
