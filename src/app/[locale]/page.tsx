@@ -5,6 +5,7 @@ import Banner from "@/components/banner";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
+
 export default async function HomePage() {
   // const { locale } = await params;
 

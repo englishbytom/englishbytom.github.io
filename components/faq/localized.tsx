@@ -2,11 +2,11 @@
 
 import { useState, useEffect } from "react";
 import FAQ from ".";
-import { useLocale } from "next-intl";
+// import { useLocale } from "next-intl";
 import { FAQItem } from ".";
 
 export default function LocalizedFAQ() {
-  const locale = useLocale();
+  const locale = 'en';
   const [faqData, setFaqData] = useState<{
     title: string;
     items: FAQItem[];

@@ -2,10 +2,10 @@
 
 import { useState, useEffect } from "react";
 import Nav from ".";
-import { useLocale } from "next-intl";
+// import { useLocale } from "next-intl";
 
 export default function LocalizedNav() {
-  const locale = useLocale();
+  const locale = 'en';
   // const [Content, setContent] = useState<any>(null);
   const [links, setLinks] = useState<{ items: [] } | null>(null);
 

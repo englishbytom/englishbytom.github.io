@@ -1,5 +1,5 @@
 // /app/contact/page.tsx
-"use client";
+// "use client";
 
 import LocalizedPage from "./LocalizedPage";
 

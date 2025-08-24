@@ -1,5 +1,5 @@
-"use client";
-import { useLocale } from "next-intl";
+// "use client";
+// import { useLocale } from "next-intl";
 import { useState, useEffect } from "react";
 import ContactForm, { ContactFormProps } from "./ContactForm";
 import { content } from "./content/en"
