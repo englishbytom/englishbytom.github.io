@@ -3,7 +3,6 @@ import createNextIntlPlugin from "next-intl/plugin";
 
 const withNextIntl = createNextIntlPlugin();
 
-/** @type {import('next').NextConfig} */
 const nextConfig: NextConfig = {
   // output: 'export',
   pageExtensions: ["js", "jsx", "ts", "tsx"],
