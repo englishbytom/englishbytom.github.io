@@ -1,20 +1,32 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Nav from "."; 
+import Nav from ".";
 import { useLocale } from "next-intl";
 
 export default function LocalizedNav() {
   const locale = useLocale();
-  const [Content, setContent] = useState<any>(null);
+  // const [Content, setContent] = useState<any>(null);
+  const [links, setLinks] = useState<{ items: [] } | null>(null);
 
-  useEffect(() => {
-    import(`./content/${locale}.md`).then((module) => {
-      setContent(() => module.default); // assign default export as component
+    useEffect(() => {
+    import(`./content/${locale}.js`).then((module) => {
+      setLinks({
+
+        items: module.items, // get the exported items array
+      });
     });
   }, [locale]);
 
-  if (!Content) return null; // or a loading skeleton
+  if (!links) return null; // or a loading skeleton
 
-  return <Nav Content={Content} />;
+  // useEffect(() => {
+  //   import(`./content/${locale}.js`).then((module) => {
+  //     setContent(() => module.default); // assign default export as component
+  //   });
+  // }, [locale]);
+
+  // if (!Content) return null; // or a loading skeleton
+
+  return <Nav items={links.items} />;
 }

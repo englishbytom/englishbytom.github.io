@@ -1,4 +1,0 @@
-- [Home](/)
-- [Community](/community)
-- [Classes](/classes/individual)
-- [Blog](/blog)

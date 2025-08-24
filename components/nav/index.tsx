@@ -12,31 +12,15 @@ import {
 } from "@/components/ui/drawer";
 import Link from "next/link";
 
-export default function Nav({ Content }: any) {
-  const components = {
-    ul: (props: any) => (
-      <ul
-        className="flex flex-col items-center gap-4 md:gap-0 md:flex-row list-none m-0!"
-        {...props}
-      />
-    ),
-    li: (props: any) => <li className="p-0! m-0!" {...props} />,
-    a: (props: any) => (
-      <a
-        className="cursor-pointer py-2 px-4 font-medium text-sm rounded-md hover:bg-accent focus:bg-accent disabled:pointer-events-none disabled:opacity-50 data-[state=open]:hover:bg-accent data-[state=open]:text-accent-foreground data-[state=open]:focus:bg-accent data-[state=open]:bg-accent/50 focus-visible:ring-ring/50 outline-none transition-[color,box-shadow] focus-visible:ring-[3px]"
-        {...props}
-      />
-    ),
-  };
-
+export default function Nav({ items }: any) {
   return (
     <header className="flex container-fluid py-5 justify-between items-center">
       <Link href="/" className="font-shantell text-md">
-          English by Tom
-        </Link>
+        English by Tom
+      </Link>
       <nav className="flex flex-row">
         <div className="hidden md:flex">
-          <Content components={components} />
+          <Content items={items} />
         </div>
         <Drawer direction="right">
           <DrawerTrigger asChild>
@@ -50,10 +34,20 @@ export default function Nav({ Content }: any) {
                 <Menu color="black" size={24} />
               </DrawerClose>
             </DrawerHeader>
-            <Content components={components} />
+            <Content items={items} />
           </DrawerContent>
         </Drawer>
       </nav>
     </header>
   );
 }
+
+const Content = ({ items }: any) => {
+  return (
+    <ul className="flex flex-col items-center gap-4 md:gap-0 md:flex-row list-none m-0!">
+      {items.map((link: any, idx: number) => (
+        <li key={idx}>{link}</li>
+      ))}
+    </ul>
+  );
+};

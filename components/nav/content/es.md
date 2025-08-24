@@ -1,4 +1,0 @@
-- [Inicio](/)
-- [Comunidad](/community)
-- [Clases](/classes)
-- [Blog](/blog)
