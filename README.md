@@ -9,3 +9,5 @@ Using shadcn components and reusable components for entire site.
 .nojekyll is required for hosting the page on github.
 
 Switched to free vercel because static hosting with github was breaking due to having setup the next-intl
+
+update
